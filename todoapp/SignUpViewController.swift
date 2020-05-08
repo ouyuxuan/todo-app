@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FirebaseFirestore
 import FirebaseAuth
 
 class SignUpViewController: UIViewController {
@@ -57,16 +58,9 @@ class SignUpViewController: UIViewController {
                             self.showError("User data could not be saved.")
                         }
                     }
-                    self.transitionToHome()
+                  self.performSegue(withIdentifier: "unwindToHome", sender: nil)
                 }
             }
         }
-    }
-    
-    func transitionToHome() {
-        let homeViewController = storyboard?.instantiateViewController(identifier: "HomeVC") as? HomeViewController
-        
-        view.window?.rootViewController = homeViewController
-        view.window?.makeKeyAndVisible()
     }
 }

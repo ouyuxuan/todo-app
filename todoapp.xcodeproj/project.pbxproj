@@ -15,10 +15,11 @@
 		13488D7220B9BA7100EB475C /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13488D7120B9BA7100EB475C /* ComposeViewController.swift */; };
 		1355429F20B9E6F800A1A133 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1355429E20B9E6F800A1A133 /* EditViewController.swift */; };
 		137FC123246499F300C0552B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137FC122246499F300C0552B /* SignUpViewController.swift */; };
-		137FC12524649A0800C0552B /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137FC12424649A0800C0552B /* SignInViewController.swift */; };
-		137FC12724649C2500C0552B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137FC12624649C2400C0552B /* ViewController.swift */; };
 		137FC12A2464ABBE00C0552B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137FC1292464ABBE00C0552B /* Constants.swift */; };
 		13A264E3246244EB002EF50F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A264E2246244EB002EF50F /* GoogleService-Info.plist */; };
+		13B924992465B7E500EA5839 /* AuthDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B924982465B7E500EA5839 /* AuthDetailsViewController.swift */; };
+		13B9249B2465E03A00EA5839 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B9249A2465E03A00EA5839 /* UIViewController.swift */; };
+		13B9249D2465F27E00EA5839 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B9249C2465F27E00EA5839 /* AccountViewController.swift */; };
 		C6E45AF6F0CA1DE9AE1592ED /* Pods_todoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251D3B98487C1B4B6FC81285 /* Pods_todoapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,10 +34,11 @@
 		13488D7120B9BA7100EB475C /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		1355429E20B9E6F800A1A133 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		137FC122246499F300C0552B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		137FC12424649A0800C0552B /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
-		137FC12624649C2400C0552B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		137FC1292464ABBE00C0552B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		13A264E2246244EB002EF50F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		13B924982465B7E500EA5839 /* AuthDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDetailsViewController.swift; sourceTree = "<group>"; };
+		13B9249A2465E03A00EA5839 /* UIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewController.swift; sourceTree = "<group>"; };
+		13B9249C2465F27E00EA5839 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		251D3B98487C1B4B6FC81285 /* Pods_todoapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_todoapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		782BB20D7412C1775885E920 /* Pods-todoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-todoapp/Pods-todoapp.debug.xcconfig"; sourceTree = "<group>"; };
 		F1DE2397BEA7748DE666E92C /* Pods-todoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-todoapp/Pods-todoapp.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,8 +88,8 @@
 				13488D6620B9B79800EB475C /* LaunchScreen.storyboard */,
 				13488D6920B9B79800EB475C /* Info.plist */,
 				137FC122246499F300C0552B /* SignUpViewController.swift */,
-				137FC12424649A0800C0552B /* SignInViewController.swift */,
-				137FC12624649C2400C0552B /* ViewController.swift */,
+				13B924982465B7E500EA5839 /* AuthDetailsViewController.swift */,
+				13B9249C2465F27E00EA5839 /* AccountViewController.swift */,
 			);
 			path = todoapp;
 			sourceTree = "<group>";
@@ -96,6 +98,7 @@
 			isa = PBXGroup;
 			children = (
 				137FC1292464ABBE00C0552B /* Constants.swift */,
+				13B9249A2465E03A00EA5839 /* UIViewController.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -250,12 +253,13 @@
 			files = (
 				137FC123246499F300C0552B /* SignUpViewController.swift in Sources */,
 				1355429F20B9E6F800A1A133 /* EditViewController.swift in Sources */,
+				13B924992465B7E500EA5839 /* AuthDetailsViewController.swift in Sources */,
 				13488D7220B9BA7100EB475C /* ComposeViewController.swift in Sources */,
+				13B9249B2465E03A00EA5839 /* UIViewController.swift in Sources */,
 				13488D6020B9B79700EB475C /* HomeViewController.swift in Sources */,
-				137FC12724649C2500C0552B /* ViewController.swift in Sources */,
-				137FC12524649A0800C0552B /* SignInViewController.swift in Sources */,
 				13488D5E20B9B79700EB475C /* AppDelegate.swift in Sources */,
 				137FC12A2464ABBE00C0552B /* Constants.swift in Sources */,
+				13B9249D2465F27E00EA5839 /* AccountViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

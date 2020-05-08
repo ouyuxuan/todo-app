@@ -424,6 +424,7 @@ DEPENDENCIES:
   - Firebase/Firestore
   - FirebaseFirestoreSwift
   - FirebaseUI
+  - GoogleSignIn
 
 SPEC REPOS:
   trunk:
@@ -492,6 +493,6 @@ SPEC CHECKSUMS:
   PromisesObjC: c119f3cd559f50b7ae681fa59dc1acd19173b7e6
   SDWebImage: 48b88379b798fd1e4298f95bb25d2cdabbf4deb3
 
-PODFILE CHECKSUM: 31930844e8c194c5c1bad36577c86ef71cb3b979
+PODFILE CHECKSUM: 897964b254a274d3adf81cd1a858ce97c27bb0c3
 
 COCOAPODS: 1.9.1

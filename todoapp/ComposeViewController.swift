@@ -7,6 +7,7 @@ class ComposeViewController: UIViewController {
     
   var db: Firestore!
   var currentUser: User?
+  let defaults = UserDefaults.standard
 
   @IBOutlet weak var textView: UITextView!
 
@@ -26,13 +27,19 @@ class ComposeViewController: UIViewController {
     
     guard let taskText = textView.text, !taskText.isEmpty else { return }
     let dataToSave: [String: Any] = ["text": taskText, "priority": 0, "user_id": currentUser?.uid ?? "", "created_on": Timestamp(date: Date()), "updated_on": Timestamp(date: Date())]
-    var ref: DocumentReference? = nil
-    
-    ref = db.collection("tasks").addDocument(data: dataToSave) { (error) in
-      if let error = error {
-        print("Add task failed: \(error.localizedDescription)")
-      } else {
-        print("Task saved: \(ref!.documentID)")
+    if (currentUser == nil) {
+      var taskArray = defaults.array(forKey: "taskArray")
+      taskArray?.append(dataToSave)
+      defaults.set(taskArray, forKey: "taskArray")
+    } else {
+      var ref: DocumentReference? = nil
+      
+      ref = db.collection("tasks").addDocument(data: dataToSave) { (error) in
+        if let error = error {
+          print("Add task failed: \(error.localizedDescription)")
+        } else {
+          print("Task saved: \(ref!.documentID)")
+        }
       }
     }
   }

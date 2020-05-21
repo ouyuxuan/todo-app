@@ -25,13 +25,13 @@ class AccountViewController: UIViewController {
     */
 
   @IBAction func signOut(_ sender: Any) {
+    GIDSignIn.sharedInstance().signOut()
     let firebaseAuth = Auth.auth()
     do {
       try firebaseAuth.signOut()
     } catch let signOutError as NSError {
       print ("Error signing out: %@", signOutError)
     }
-    GIDSignIn.sharedInstance().signOut()
     self.performSegue(withIdentifier: "unwindFromAccount", sender: self)
   }
 }

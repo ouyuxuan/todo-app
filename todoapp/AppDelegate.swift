@@ -44,9 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     guard let authentication = user.authentication else { return }
     let credential = GoogleAuthProvider.credential(withIDToken: authentication.idToken,
                                                    accessToken: authentication.accessToken)
-    controller.firebaseLogin(credential)
-    controller.addUserToFirestore(userId, email, givenName!, familyName)
-    
+    controller.firebaseLogin(credential, userId, email, givenName, familyName)
     NotificationCenter.default.post(
       name: Notification.Name(rawValue: "ToggleAuthUINotification"),
       object: nil,

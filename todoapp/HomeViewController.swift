@@ -18,32 +18,41 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
   var taskListener: ListenerRegistration!
   var currentUser: User?
   var handle: AuthStateDidChangeListenerHandle?
+  let defaults = UserDefaults.standard
 
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-      self.currentUser = user
-      self.setTitleDisplay(user)
-      self.tableView.reloadData()
-    }
-    currentUser = Auth.auth().currentUser
-    taskListener = db.collection("tasks").whereField("user_id", isEqualTo: currentUser?.uid ?? "").addSnapshotListener { (querySnapshot, err) in
-      guard let documents = querySnapshot?.documents else {
-        print("Error fetching documents: \(err!)")
-        return
-      }
-      self.taskArray.removeAll()
-      for document in documents {
-        if querySnapshot != nil {
-          let text = document.data()["text"] as? String ?? ""
-          let priority = document.data()["priority"] as? Int ?? 0
-          let uuid = document.documentID
-          let task = Tasks(uuid: uuid, text: text, priority: priority)
-          self.taskArray.append(task)
+      if user != nil {
+        self.currentUser = user
+        self.taskListener = self.db.collection("tasks").whereField("user_id", isEqualTo: self.currentUser?.uid ?? "").addSnapshotListener { (querySnapshot, err) in
+          guard let documents = querySnapshot?.documents else {
+            print("Error fetching documents: \(err!)")
+            return
+          }
+          self.taskArray.removeAll()
+          for document in documents {
+            if querySnapshot != nil {
+              let text = document.data()["text"] as? String ?? ""
+              let priority = document.data()["priority"] as? Int ?? 0
+              let uuid = document.documentID
+              let task = Tasks(uuid: uuid, text: text, priority: priority)
+              self.taskArray.append(task)
+            }
+          }
+          self.tableView.reloadData()
         }
-      }
+      } else {
+        self.currentUser = nil
+        self.taskArray.removeAll()
+        if let items = self.defaults.array(forKey: "taskArray") as? [Tasks] {
+          self.taskArray = items
+        }
         self.tableView.reloadData()
+      }
+      self.setTitleDisplay(user)
     }
+    
   }
   
   override func viewDidLoad() {
@@ -60,7 +69,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
       self.navigationItem.title = "To-Do List"
     }
   }
-    
+  
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
     // Dispose of any resources that can be recreated.
@@ -93,14 +102,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
   //delete row and commit to database
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      db.collection("tasks").document(taskArray[indexPath.row].uuid).delete() { err in
-        if let err = err {
-          print("Error removing document: \(err)")
-        } else {
-          print("Document successfully removed!")
-        }
-      }
       self.taskArray.remove(at: indexPath.row)
+      if currentUser != nil {
+        db.collection("tasks").document(taskArray[indexPath.row].uuid).delete() { err in
+          if let err = err {
+            print("Error removing document: \(err)")
+          } else {
+            print("Document successfully removed!")
+          }
+        }
+      } else {
+        defaults.set(taskArray, forKey: "taskArray")
+      }
       tableView.deleteRows(at: [indexPath], with: .automatic)
     }
   }
@@ -113,7 +126,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     Auth.auth().removeStateDidChangeListener(handle!)
-    taskListener.remove()
+    taskListener?.remove()
   }
   
   @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
@@ -122,7 +135,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
   
   @IBAction func accountTapped(_ sender: Any) {
-    if currentUser != nil {
+    if (currentUser != nil) {
       self.performSegue(withIdentifier: "loggedInSegue", sender: self)
     } else {
       self.performSegue(withIdentifier: "notLoggedInSegue", sender: self)

@@ -13,5 +13,6 @@ target 'todoapp' do
   pod 'Firebase/Firestore'
   pod 'FirebaseFirestoreSwift'
   pod 'GoogleSignIn'
+  pod 'SVProgressHUD'
 
 end

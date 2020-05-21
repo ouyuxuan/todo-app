@@ -51,19 +51,21 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="z1O-46-Za3" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="GUW-2r-nrP"/>
+                            <constraint firstItem="z1O-46-Za3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="33Z-02-8j7"/>
+                            <constraint firstItem="z1O-46-Za3" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="KEy-Y1-GkH"/>
                             <constraint firstItem="mWd-JK-5pY" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="W1h-B6-TdY"/>
-                            <constraint firstItem="z1O-46-Za3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WDc-pF-KYY"/>
                             <constraint firstItem="mWd-JK-5pY" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="cB0-oM-Vfu"/>
+                            <constraint firstItem="z1O-46-Za3" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="f4O-mi-MhQ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="z1O-46-Za3" secondAttribute="bottom" id="flu-mK-kJG"/>
+                            <constraint firstItem="z1O-46-Za3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="oYQ-Zb-M4B"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="mWd-JK-5pY" secondAttribute="bottom" id="vt5-eI-Grr"/>
-                            <constraint firstAttribute="trailing" secondItem="z1O-46-Za3" secondAttribute="trailing" id="x0G-ha-EaK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="frQ-e0-Otz"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="tableView" destination="z1O-46-Za3" id="qau-wL-ciN"/>
                         <segue destination="kCm-kd-1F5" kind="show" identifier="loggedInSegue" id="EZ8-SW-jkC"/>
@@ -72,7 +74,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4106" y="899"/>
+            <point key="canvasLocation" x="4104.8000000000002" y="898.52216748768478"/>
         </scene>
         <!--Edit View Controller-->
         <scene sceneID="dEO-Gx-hLQ">
@@ -174,26 +176,26 @@
             </objects>
             <point key="canvasLocation" x="5231" y="899"/>
         </scene>
-        <!--Account-->
+        <!--Auth Details View Controller-->
         <scene sceneID="dGg-9u-BEA">
             <objects>
-                <viewController id="ow0-Wh-GWc" customClass="AuthViewController" customModule="todoapp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ow0-Wh-GWc" userLabel="Auth Details View Controller" customClass="AuthViewController" customModule="todoapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="S5r-SZ-yJG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1sQ-BR-wSn">
-                                <rect key="frame" x="40" y="168" width="295" height="260"/>
+                                <rect key="frame" x="40" y="80" width="295" height="260"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="as9-yE-RxT">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lQM-yo-nX2">
                                         <rect key="frame" x="0.0" y="70" width="295" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yWj-Wg-9e4">
                                         <rect key="frame" x="0.0" y="140" width="295" height="50"/>
@@ -219,7 +221,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="GFR-RG-qEM">
-                                <rect key="frame" x="40" y="667.66666666666663" width="295" height="70.333333333333371"/>
+                                <rect key="frame" x="40" y="579.66666666666663" width="295" height="70.333333333333371"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Rw-Ot-7d4">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="30"/>
@@ -255,7 +257,7 @@
                         <outlet property="passwordTextField" destination="lQM-yo-nX2" id="Ora-Kv-u70"/>
                         <outlet property="signInButton" destination="yWj-Wg-9e4" id="dwR-0X-uqu"/>
                         <outlet property="signUpButton" destination="7Rw-Ot-7d4" id="qGq-WQ-bfY"/>
-                        <segue destination="avo-W9-Y2q" kind="unwind" identifier="unwindFromSignIn" unwindAction="unwindToHome:" id="7nu-2p-UhM"/>
+                        <segue destination="avo-W9-Y2q" kind="unwind" identifier="unwindFromAuth" unwindAction="unwindToHome:" id="7nu-2p-UhM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mz4-VY-BWb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -268,21 +270,21 @@
             <objects>
                 <viewController id="pZg-OZ-3kn" customClass="SignUpViewController" customModule="todoapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Cf2-kd-BYG">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="6AA-8l-GP1">
-                                <rect key="frame" x="40" y="188" width="295" height="230.33333333333337"/>
+                                <rect key="frame" x="40" y="100.00000000000001" width="295" height="230.33333333333337"/>
                                 <subviews>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LXI-5Q-KmN">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next" textContentType="email"/>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CoL-Sy-rgJ">
                                         <rect key="frame" x="0.0" y="70" width="295" height="50"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="continue" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no" textContentType="password"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vJO-7Q-ARl">
                                         <rect key="frame" x="0.0" y="140" width="295" height="50"/>
@@ -352,11 +354,11 @@
             <objects>
                 <viewController id="kCm-kd-1F5" customClass="AccountViewController" customModule="todoapp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="hEt-Ud-pin">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="724"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="1zA-Z2-HeZ">
-                                <rect key="frame" x="40" y="138" width="295" height="90.333333333333314"/>
+                                <rect key="frame" x="40" y="49.999999999999993" width="295" height="90.333333333333314"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0or-Gn-Tqr">
                                         <rect key="frame" x="0.0" y="0.0" width="295" height="20.333333333333332"/>
@@ -393,11 +395,11 @@
                     <navigationItem key="navigationItem" id="nCp-4x-k6s"/>
                     <connections>
                         <outlet property="textLabel" destination="0or-Gn-Tqr" id="DY6-Bg-D3H"/>
-                        <segue destination="IYc-lm-R0F" kind="unwind" identifier="unwindFromAccount" unwindAction="unwindToHome:" id="JIr-bI-SYb"/>
+                        <segue destination="mJE-gp-kv8" kind="unwind" identifier="unwindFromAccount" unwindAction="unwindToHome:" id="5RY-I0-mbK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2np-LT-BNT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="IYc-lm-R0F" userLabel="Exit" sceneMemberID="exit"/>
+                <exit id="mJE-gp-kv8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="4105" y="1670"/>
         </scene>

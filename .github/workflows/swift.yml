@@ -8,12 +8,14 @@ on:
 
 jobs:
   build:
+    name: Build
 
     runs-on: macos-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout master
+      uses: actions/checkout@v2
     - name: Build
-      run: swift build -v
+      run: xcodebuild -project "todoapp.xcodeproj" -scheme "todoapp" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=N
     - name: Run tests
-      run: swift test -v
+      run: xcodebuild clean test -project "todoapp.xcodeproj" -scheme "todoapp" -destination "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest"

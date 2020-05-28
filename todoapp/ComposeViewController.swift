@@ -1,4 +1,5 @@
 import UIKit
+import CoreData
 import Firebase
 import FirebaseFirestore
 import FirebaseFirestoreSwift
@@ -7,7 +8,9 @@ class ComposeViewController: UIViewController {
     
   var db: Firestore!
   var currentUser: User?
-  let defaults = UserDefaults.standard
+  var taskArray = [Task]()
+  var dataFilePath: URL?
+  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
   @IBOutlet weak var textView: UITextView!
 
@@ -26,13 +29,33 @@ class ComposeViewController: UIViewController {
     presentingViewController?.dismiss(animated: true, completion: nil)
     
     guard let taskText = textView.text, !taskText.isEmpty else { return }
-    let dataToSave: [String: Any] = ["text": taskText, "priority": 0, "user_id": currentUser?.uid ?? "", "created_on": Timestamp(date: Date()), "updated_on": Timestamp(date: Date())]
+    
+    let taskToSave = Task(context: self.context)
+    taskToSave.text = taskText
+    taskToSave.done = false
+    taskToSave.uuid = currentUser?.uid ?? ""
+    taskToSave.priority = 0
+    taskToSave.createdOn = Date()
+    taskToSave.updatedOn = Date()
+    
     if (currentUser == nil) {
-      var taskArray = defaults.array(forKey: "taskArray")
-      taskArray?.append(dataToSave)
-      defaults.set(taskArray, forKey: "taskArray")
+      taskArray.append(taskToSave)
+      
+      do {
+        try context.save()
+      } catch {
+        print("Error saving context \(error)")
+      }
     } else {
       var ref: DocumentReference? = nil
+      let dataToSave = [
+        "user_id": taskToSave.uuid!,
+        "text": taskToSave.text!,
+        "done": taskToSave.done,
+        "priority": taskToSave.priority,
+        "created_on": taskToSave.createdOn!,
+        "updated_on": taskToSave.updatedOn!,
+        ] as [String : Any]
       
       ref = db.collection("tasks").addDocument(data: dataToSave) { (error) in
         if let error = error {

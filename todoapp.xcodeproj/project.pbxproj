@@ -15,10 +15,10 @@
 		13488D7220B9BA7100EB475C /* ComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13488D7120B9BA7100EB475C /* ComposeViewController.swift */; };
 		1355429F20B9E6F800A1A133 /* EditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1355429E20B9E6F800A1A133 /* EditViewController.swift */; };
 		137FC123246499F300C0552B /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137FC122246499F300C0552B /* SignUpViewController.swift */; };
-		137FC12A2464ABBE00C0552B /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 137FC1292464ABBE00C0552B /* Constants.swift */; };
 		13A264E3246244EB002EF50F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 13A264E2246244EB002EF50F /* GoogleService-Info.plist */; };
 		13B924992465B7E500EA5839 /* AuthDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B924982465B7E500EA5839 /* AuthDetailsViewController.swift */; };
 		13B9249D2465F27E00EA5839 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13B9249C2465F27E00EA5839 /* AccountViewController.swift */; };
+		13DA43DE2477371F0063BFB4 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 13DA43DC2477371F0063BFB4 /* DataModel.xcdatamodeld */; };
 		C6E45AF6F0CA1DE9AE1592ED /* Pods_todoapp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 251D3B98487C1B4B6FC81285 /* Pods_todoapp.framework */; };
 /* End PBXBuildFile section */
 
@@ -33,10 +33,10 @@
 		13488D7120B9BA7100EB475C /* ComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComposeViewController.swift; sourceTree = "<group>"; };
 		1355429E20B9E6F800A1A133 /* EditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditViewController.swift; sourceTree = "<group>"; };
 		137FC122246499F300C0552B /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
-		137FC1292464ABBE00C0552B /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		13A264E2246244EB002EF50F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		13B924982465B7E500EA5839 /* AuthDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthDetailsViewController.swift; sourceTree = "<group>"; };
 		13B9249C2465F27E00EA5839 /* AccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
+		13DA43DD2477371F0063BFB4 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		251D3B98487C1B4B6FC81285 /* Pods_todoapp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_todoapp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		782BB20D7412C1775885E920 /* Pods-todoapp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoapp.debug.xcconfig"; path = "Pods/Target Support Files/Pods-todoapp/Pods-todoapp.debug.xcconfig"; sourceTree = "<group>"; };
 		F1DE2397BEA7748DE666E92C /* Pods-todoapp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-todoapp.release.xcconfig"; path = "Pods/Target Support Files/Pods-todoapp/Pods-todoapp.release.xcconfig"; sourceTree = "<group>"; };
@@ -75,7 +75,7 @@
 		13488D5C20B9B79700EB475C /* todoapp */ = {
 			isa = PBXGroup;
 			children = (
-				137FC1282464ABB100C0552B /* Helpers */,
+				13DA43DF247737370063BFB4 /* Model */,
 				13488D5D20B9B79700EB475C /* AppDelegate.swift */,
 				13488D5F20B9B79700EB475C /* HomeViewController.swift */,
 				13488D6120B9B79700EB475C /* Main.storyboard */,
@@ -92,12 +92,12 @@
 			path = todoapp;
 			sourceTree = "<group>";
 		};
-		137FC1282464ABB100C0552B /* Helpers */ = {
+		13DA43DF247737370063BFB4 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				137FC1292464ABBE00C0552B /* Constants.swift */,
+				13DA43DC2477371F0063BFB4 /* DataModel.xcdatamodeld */,
 			);
-			path = Helpers;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		43627F215BF441A42932824D /* Pods */ = {
@@ -253,8 +253,8 @@
 				13B924992465B7E500EA5839 /* AuthDetailsViewController.swift in Sources */,
 				13488D7220B9BA7100EB475C /* ComposeViewController.swift in Sources */,
 				13488D6020B9B79700EB475C /* HomeViewController.swift in Sources */,
+				13DA43DE2477371F0063BFB4 /* DataModel.xcdatamodeld in Sources */,
 				13488D5E20B9B79700EB475C /* AppDelegate.swift in Sources */,
-				137FC12A2464ABBE00C0552B /* Constants.swift in Sources */,
 				13B9249D2465F27E00EA5839 /* AccountViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +457,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		13DA43DC2477371F0063BFB4 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				13DA43DD2477371F0063BFB4 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 13DA43DD2477371F0063BFB4 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 13488D5220B9B79700EB475C /* Project object */;
 }

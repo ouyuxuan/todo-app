@@ -5,7 +5,8 @@ class EditViewController: UIViewController {
     
   @IBOutlet weak var editTextView: UITextView!
 
-  var selectedTask : Tasks?
+  var selectedTask : Task?
+  var dataFilePath: URL?
   
   override func viewDidLoad() {
     super.viewDidLoad()

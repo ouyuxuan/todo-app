@@ -8,18 +8,12 @@ on:
 
 jobs:
   build:
-    name: Build
 
     runs-on: macos-latest
 
     steps:
-    - name: Checkout master
-      uses: actions/checkout@v2
-    - name: CocoaPod Install
-      run: pod install
-    - name: Force xcode 11
-      run: sudo xcode-select -switch /Applications/Xcode_11.3.app
+    - uses: actions/checkout@v2
     - name: Build
-      run: xcodebuild -project "todoapp.xcodeproj" -scheme "todoapp" -destination "generic/platform=iOS" -configuration Release build CODE_SIGNING_ALLOWED=N
+      run: swift build -v
     - name: Run tests
-      run: xcodebuild clean test -project "todoapp.xcodeproj" -scheme "todoapp" -destination "platform=iOS Simulator,name=iPhone 11 Pro Max,OS=latest"
+      run: swift test -v

@@ -2,15 +2,13 @@ import UIKit
 import CoreData
 import Firebase
 import FirebaseFirestore
-import FirebaseFirestoreSwift
 
 class ComposeViewController: UIViewController {
     
+  private var appDelegate = UIApplication.shared.delegate as! AppDelegate
+  private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   var db: Firestore!
   var currentUser: User?
-  var taskArray = [Task]()
-  var dataFilePath: URL?
-  let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
 
   @IBOutlet weak var textView: UITextView!
 
@@ -33,23 +31,18 @@ class ComposeViewController: UIViewController {
     let taskToSave = Task(context: self.context)
     taskToSave.text = taskText
     taskToSave.done = false
-    taskToSave.uuid = currentUser?.uid ?? ""
+    taskToSave.userid = currentUser?.uid ?? ""
+    taskToSave.uuid = UUID().uuidString
     taskToSave.priority = 0
     taskToSave.createdOn = Date()
     taskToSave.updatedOn = Date()
     
     if (currentUser == nil) {
-      taskArray.append(taskToSave)
-      
-      do {
-        try context.save()
-      } catch {
-        print("Error saving context \(error)")
-      }
+      appDelegate.saveContext()
     } else {
-      var ref: DocumentReference? = nil
       let dataToSave = [
-        "user_id": taskToSave.uuid!,
+        "uuid": taskToSave.uuid!,
+        "userid": taskToSave.userid!,
         "text": taskToSave.text!,
         "done": taskToSave.done,
         "priority": taskToSave.priority,
@@ -57,11 +50,11 @@ class ComposeViewController: UIViewController {
         "updated_on": taskToSave.updatedOn!,
         ] as [String : Any]
       
-      ref = db.collection("tasks").addDocument(data: dataToSave) { (error) in
+      db.collection("tasks").document(taskToSave.uuid!).setData(dataToSave) { (error) in
         if let error = error {
           print("Add task failed: \(error.localizedDescription)")
         } else {
-          print("Task saved: \(ref!.documentID)")
+          print("Task saved: \(taskToSave.uuid!)")
         }
       }
     }

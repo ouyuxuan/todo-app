@@ -43,7 +43,7 @@ class AuthViewController: UIViewController {
     
     Auth.auth().signIn(with: credential) { (result, error) in
       if (error != nil) {
-        print(error?.localizedDescription)
+        print(error?.localizedDescription ?? "Error signing in")
       } else {
         self.performSegue(withIdentifier: "unwindFromAuth", sender: self)
       }
@@ -69,6 +69,7 @@ class AuthViewController: UIViewController {
       if error != nil {
         self.errorLabel.text = error?.localizedDescription
         self.errorLabel.alpha = 1
+        SVProgressHUD.dismiss()
       } else {
         SVProgressHUD.dismiss()
         self.performSegue(withIdentifier: "unwindFromAuth", sender: self)

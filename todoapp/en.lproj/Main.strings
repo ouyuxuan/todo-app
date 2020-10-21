@@ -1,0 +1,45 @@
+
+/* Class = "UINavigationItem"; title = "Account"; ObjectID = "0KR-PT-m0R"; */
+"0KR-PT-m0R.title" = "Account";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "0or-Gn-Tqr"; */
+"0or-Gn-Tqr.text" = "Label";
+
+/* Class = "UILabel"; text = "Error"; ObjectID = "0tB-8H-wid"; */
+"0tB-8H-wid.text" = "Error";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "7Rw-Ot-7d4"; */
+"7Rw-Ot-7d4.normalTitle" = "Sign Up";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "CoL-Sy-rgJ"; */
+"CoL-Sy-rgJ.placeholder" = "Password";
+
+/* Class = "UINavigationItem"; title = "Edit Task"; ObjectID = "IXk-AU-uQ9"; */
+"IXk-AU-uQ9.title" = "Edit Task";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "LXI-5Q-KmN"; */
+"LXI-5Q-KmN.placeholder" = "Email";
+
+/* Class = "UINavigationItem"; title = "New Task"; ObjectID = "Nc5-gw-XgV"; */
+"Nc5-gw-XgV.title" = "New Task";
+
+/* Class = "UILabel"; text = "Label"; ObjectID = "YOk-JZ-K38"; */
+"YOk-JZ-K38.text" = "Label";
+
+/* Class = "UITextField"; placeholder = "Email"; ObjectID = "as9-yE-RxT"; */
+"as9-yE-RxT.placeholder" = "Email";
+
+/* Class = "UIButton"; normalTitle = "Sign Out"; ObjectID = "bKh-D6-Fv3"; */
+"bKh-D6-Fv3.normalTitle" = "Sign Out";
+
+/* Class = "UITextField"; placeholder = "Password"; ObjectID = "lQM-yo-nX2"; */
+"lQM-yo-nX2.placeholder" = "Password";
+
+/* Class = "UIBarButtonItem"; title = "Account"; ObjectID = "pFr-cd-ory"; */
+"pFr-cd-ory.title" = "Account";
+
+/* Class = "UIButton"; normalTitle = "Sign Up"; ObjectID = "vJO-7Q-ARl"; */
+"vJO-7Q-ARl.normalTitle" = "Sign Up";
+
+/* Class = "UIButton"; normalTitle = "Sign In"; ObjectID = "yWj-Wg-9e4"; */
+"yWj-Wg-9e4.normalTitle" = "Sign In";

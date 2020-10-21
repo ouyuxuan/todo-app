@@ -67,9 +67,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GIDSignInDelegate {
     self.saveContext()
   }
   
-  lazy var persistentContainer: NSPersistentCloudKitContainer = {
-    let container = NSPersistentCloudKitContainer(name: "DataModel")
-    container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+  lazy var persistentContainer: NSPersistentContainer = {
+    let container = NSPersistentContainer(name: "TodoApp")
+    container.loadPersistentStores(completionHandler: {
+      (storeDescription, error) in
+      print(storeDescription)
+      
       if let error = error as NSError? {
         fatalError("Unresolved error \(error), \(error.userInfo)")
       }

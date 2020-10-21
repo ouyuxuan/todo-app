@@ -51,6 +51,7 @@ class SignUpViewController: UIViewController {
       SVProgressHUD.show(withStatus: "Creating account")
       Auth.auth().createUser(withEmail: email, password: password) { (result, error) in
         if error != nil {
+          SVProgressHUD.dismiss()
           self.showError("Error in creating user: \(error!.localizedDescription)")
         } else {
           let db = Firestore.firestore()

@@ -20,25 +20,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     handle = Auth.auth().addStateDidChangeListener { (auth, user) in
       if user != nil {
         self.currentUser = user
-//        self.taskListener = self.db.collection("tasks").whereField("user_id", isEqualTo: self.currentUser?.uid ?? "").addSnapshotListener { (querySnapshot, err) in
-//          guard let documents = querySnapshot?.documents else {
-//            print("Error fetching documents: \(err!)")
-//            return
-//          }
-//          self.taskArray.removeAll()
-//          for document in documents {
-//            if querySnapshot != nil {
-//              let task = Task(context: self.context)
-//              task.text = document.data()["text"] as? String ?? ""
-//              task.priority = Int32(document.data()["priority"] as? Int ?? 0)
-//              task.userid = document.data()["user_id"] as? String ?? ""
-//              task.uuid = document.data()["uuid"] as? String ?? ""
-//              task.done = document.data()["done"] as? Bool ?? false
-////              self.taskArray.append(task)
-//            }
-//          }
-//          self.tableView.reloadData()
-//        }
         
         self.db.collection("tasks").whereField("userid", isEqualTo: self.currentUser?.uid).getDocuments() { (querySnapshot, err) in
           if let err = err {

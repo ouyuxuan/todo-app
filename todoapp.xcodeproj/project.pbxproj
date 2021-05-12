@@ -84,21 +84,45 @@
 		13488D5C20B9B79700EB475C /* todoapp */ = {
 			isa = PBXGroup;
 			children = (
-				13DA43DC2477371F0063BFB4 /* TodoApp.xcdatamodeld */,
-				13488D5D20B9B79700EB475C /* AppDelegate.swift */,
-				13488D5F20B9B79700EB475C /* HomeViewController.swift */,
-				13488D6120B9B79700EB475C /* Main.storyboard */,
-				1355429E20B9E6F800A1A133 /* EditViewController.swift */,
-				13488D7120B9BA7100EB475C /* ComposeViewController.swift */,
+				13D2722F264C511F001BAD6C /* Controller */,
+				13D2722E264C5112001BAD6C /* View */,
+				13D2722D264C5101001BAD6C /* Model */,
 				1325A778253FB7B000B2A7B2 /* GoogleService-Info.plist */,
 				13488D6420B9B79800EB475C /* Assets.xcassets */,
 				13488D6620B9B79800EB475C /* LaunchScreen.storyboard */,
 				13488D6920B9B79800EB475C /* Info.plist */,
+			);
+			path = todoapp;
+			sourceTree = "<group>";
+		};
+		13D2722D264C5101001BAD6C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				13DA43DC2477371F0063BFB4 /* TodoApp.xcdatamodeld */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		13D2722E264C5112001BAD6C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				13488D6120B9B79700EB475C /* Main.storyboard */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		13D2722F264C511F001BAD6C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
 				137FC122246499F300C0552B /* SignUpViewController.swift */,
 				13B924982465B7E500EA5839 /* AuthDetailsViewController.swift */,
 				13B9249C2465F27E00EA5839 /* AccountViewController.swift */,
+				13488D5D20B9B79700EB475C /* AppDelegate.swift */,
+				13488D5F20B9B79700EB475C /* HomeViewController.swift */,
+				1355429E20B9E6F800A1A133 /* EditViewController.swift */,
+				13488D7120B9BA7100EB475C /* ComposeViewController.swift */,
 			);
-			path = todoapp;
+			path = Controller;
 			sourceTree = "<group>";
 		};
 		A198C99A0EA4AC71338E32B6 /* Pods */ = {

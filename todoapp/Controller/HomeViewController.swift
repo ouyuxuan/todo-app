@@ -34,8 +34,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
               task.done = document.data()["done"] as? Bool ?? false
               self.taskArray.append(task)
             }
+            self.tableView.reloadData()
           }
-          self.tableView.reloadData()
         }
       } else {
         self.currentUser = nil
@@ -102,6 +102,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
     performSegue(withIdentifier: "gotoEdit", sender: indexPath)
   }
   
@@ -134,10 +135,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     Auth.auth().removeStateDidChangeListener(handle!)
   }
   
-  @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {
-//    let sourceViewController = unwindSegue.source
-    // Use data from the view controller which initiated the unwind segue
-  }
+  @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}
   
   @IBAction func accountTapped(_ sender: Any) {
     if (currentUser != nil) {

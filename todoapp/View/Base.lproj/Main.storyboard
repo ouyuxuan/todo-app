@@ -177,9 +177,11 @@
                     <navigationItem key="navigationItem" id="OKY-iC-6uY"/>
                     <connections>
                         <outlet property="textView" destination="wTN-2k-7d1" id="QKn-lk-2Zd"/>
+                        <segue destination="5d5-ED-y0b" kind="unwind" identifier="fromComposeToHome" unwindAction="unwindToHome:" id="vFb-1t-fHQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JfV-8b-LZD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="5d5-ED-y0b" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="5231" y="899"/>
         </scene>

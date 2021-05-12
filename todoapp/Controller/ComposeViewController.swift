@@ -27,6 +27,7 @@ class ComposeViewController: UIViewController {
     guard let taskText = textView.text, !taskText.isEmpty else { return }
         
     let uuid = UUID().uuidString
+    
     if (currentUser == nil) {
       let taskToSave = Task(context: self.context)
       taskToSave.text = taskText
@@ -37,6 +38,7 @@ class ComposeViewController: UIViewController {
       taskToSave.createdOn = Date()
       taskToSave.updatedOn = Date()
       appDelegate.saveContext()
+      self.performSegue(withIdentifier: "fromComposeToHome", sender: self)
     } else {
       let dataToSave = [
         "uuid": uuid,
@@ -61,6 +63,13 @@ class ComposeViewController: UIViewController {
 
   @IBAction func cancelTapped(_ sender: Any) {
     presentingViewController?.dismiss(animated: true, completion: nil)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "fromComposeToHome" {
+      let destinationVC = segue.destination as! HomeViewController
+      destinationVC.loadTasks()
+    }
   }
 
 /*

@@ -30,8 +30,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     super.viewWillAppear(animated)
     handle = Auth.auth().addStateDidChangeListener { (auth, user) in
       self.currentUser = user
-      self.taskArray.removeAll()
       self.taskListener = self.db.collection("tasks").whereField("userid", isEqualTo: self.currentUser?.uid ?? self.deviceId!).addSnapshotListener { (querySnapshot, err) in
+        self.taskArray.removeAll()
         if let err = err {
           print("Error getting documents: \(err)")
           let alert = UIAlertController(title: "Error", message: "Could not fetch list items", preferredStyle: UIAlertController.Style.alert)
@@ -47,8 +47,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
               userid: document.data()["userid"] as? String ?? "")
             self.taskArray.append(task)
           }
-          self.tableView.reloadData()
         }
+        self.tableView.reloadData()
       }
     self.setTitleDisplay(user)
     }

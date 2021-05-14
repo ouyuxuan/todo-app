@@ -3,45 +3,54 @@ import CoreData
 import Firebase
 import FirebaseFirestore
 
+struct TaskStruct {
+  var createdOn: Date?
+  var done: Bool
+  var priority: Int
+  var text: String
+  var updatedOn: Date?
+  var uuid: String
+  var userid: String
+}
+
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
   @IBOutlet weak var tableView: UITableView!
-    
+  
   var db: Firestore!
   var taskListener: ListenerRegistration!
   var currentUser: User?
   var handle: AuthStateDidChangeListenerHandle?
   var appDelegate = UIApplication.shared.delegate as! AppDelegate
   let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-  var taskArray: [Task] = []
+  var taskArray: [TaskStruct] = []
+  let deviceId = UIDevice.current.identifierForVendor?.uuidString
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     handle = Auth.auth().addStateDidChangeListener { (auth, user) in
-      if user != nil {
-        self.currentUser = user
-        self.taskListener = self.db.collection("tasks").whereField("userid", isEqualTo: self.currentUser?.uid ?? "").addSnapshotListener { (querySnapshot, err) in
-          if let err = err {
-            print("Error getting documents: \(err)")
-          } else {
-            self.taskArray.removeAll()
-            for document in querySnapshot!.documents {
-              let task = Task(context: self.context)
-              task.text = document.data()["text"] as? String ?? ""
-              task.priority = Int32(document.data()["priority"] as? Int ?? 0)
-              task.userid = document.data()["userid"] as? String ?? ""
-              task.uuid = document.data()["uuid"] as? String ?? ""
-              task.done = document.data()["done"] as? Bool ?? false
-              self.taskArray.append(task)
-            }
-            self.tableView.reloadData()
+      self.currentUser = user
+      self.taskArray.removeAll()
+      self.taskListener = self.db.collection("tasks").whereField("userid", isEqualTo: self.currentUser?.uid ?? self.deviceId!).addSnapshotListener { (querySnapshot, err) in
+        if let err = err {
+          print("Error getting documents: \(err)")
+          let alert = UIAlertController(title: "Error", message: "Could not fetch list items", preferredStyle: UIAlertController.Style.alert)
+          alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+          self.present(alert, animated: true, completion: nil)
+        } else {
+          for document in querySnapshot!.documents {
+            let task = TaskStruct(
+              done: document.data()["done"] as? Bool ?? false,
+              priority: Int(document.data()["priority"] as? Int ?? 0),
+              text: document.data()["text"] as? String ?? "",
+              uuid: document.data()["uuid"] as? String ?? "",
+              userid: document.data()["userid"] as? String ?? "")
+            self.taskArray.append(task)
           }
+          self.tableView.reloadData()
         }
-      } else {
-        self.currentUser = nil
-        self.loadTasks()
       }
-      self.setTitleDisplay(user)
+    self.setTitleDisplay(user)
     }
   }
   
@@ -52,19 +61,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     tableView.dataSource = self
   }
   
-  func loadTasks() {
-    // fetch tasks from Core Data
-    taskArray.removeAll()
-    let request = Task.fetchRequest() as NSFetchRequest<Task>
-    let predicate = NSPredicate(format: "userid == %@", "")
-    request.predicate = predicate
-    do {
-      taskArray = try context.fetch(request)
-      tableView.reloadData()
-    } catch {
-      print("Error fetching context \(error)")
-    }
-  }
   
   func setTitleDisplay(_ user: User?) {
     if let email = user?.email {
@@ -86,41 +82,40 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let task = taskArray[indexPath.row]
     let cell = tableView.dequeueReusableCell(withIdentifier: "TaskCell")
-    cell?.textLabel?.text = task.text ?? ""
-    print(task)
+    cell?.textLabel?.text = task.text
     return cell!
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "gotoEdit" {
+    if segue.identifier == "goToEdit" {
       let destinationVC = segue.destination as! EditViewController
       if let indexPath = sender as? NSIndexPath{
         let selectedTask = self.taskArray[indexPath.row]
-        destinationVC.selectedTaskUuid = selectedTask.uuid ?? ""
+        destinationVC.selectedTaskUuid = selectedTask.text
       }
     }
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    performSegue(withIdentifier: "gotoEdit", sender: indexPath)
+    performSegue(withIdentifier: "goToEdit", sender: indexPath)
   }
   
   //delete row and commit to database
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      if currentUser != nil {
-        db.collection("tasks").document(taskArray[indexPath.row].uuid!).delete() { err in
-          if let err = err {
-            print("Error removing document: \(err)")
-          } else {
-            print("Document successfully removed!")
-          }
+      
+      db.collection("tasks").document(taskArray[indexPath.row].uuid).delete() { err in
+        if let err = err {
+          print("Error removing document: \(err)")
+          let alert = UIAlertController(title: "Error", message: "Could not delete list item", preferredStyle: UIAlertController.Style.alert)
+          alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+          self.present(alert, animated: true, completion: nil)
+        } else {
+          print("Document successfully removed!")
         }
       }
-      context.delete(taskArray[indexPath.row])
       taskArray.remove(at: indexPath.row)
-      appDelegate.saveContext()
       tableView.reloadData()
     }
   }

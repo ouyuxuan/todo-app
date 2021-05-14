@@ -9,7 +9,8 @@ class ComposeViewController: UIViewController {
   private let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   var db: Firestore!
   var currentUser: User?
-
+  let deviceId = UIDevice.current.identifierForVendor?.uuidString
+  
   @IBOutlet weak var textView: UITextView!
 
   override func viewDidLoad() {
@@ -27,37 +28,27 @@ class ComposeViewController: UIViewController {
     guard let taskText = textView.text, !taskText.isEmpty else { return }
         
     let uuid = UUID().uuidString
+    let dataToSave = [
+      "uuid": uuid,
+      "userid": currentUser?.uid ?? deviceId!,
+      "text": taskText,
+      "done": false,
+      "priority": 0,
+      "created_on": Date(),
+      "updated_on": Date(),
+      ] as [String : Any]
     
-    if (currentUser == nil) {
-      let taskToSave = Task(context: self.context)
-      taskToSave.text = taskText
-      taskToSave.done = false
-      taskToSave.userid = ""
-      taskToSave.uuid = uuid
-      taskToSave.priority = 0
-      taskToSave.createdOn = Date()
-      taskToSave.updatedOn = Date()
-      appDelegate.saveContext()
-      self.performSegue(withIdentifier: "fromComposeToHome", sender: self)
-    } else {
-      let dataToSave = [
-        "uuid": uuid,
-        "userid": currentUser?.uid ?? "",
-        "text": taskText,
-        "done": false,
-        "priority": 0,
-        "created_on": Date(),
-        "updated_on": Date(),
-        ] as [String : Any]
-      
-      db.collection("tasks").document(uuid).setData(dataToSave) { (error) in
-        if let error = error {
-          print("Add task failed: \(error.localizedDescription)")
-        } else {
-          print("Task saved: \(uuid)")
-        }
+    db.collection("tasks").document(uuid).setData(dataToSave) { (error) in
+      if let error = error {
+        print("Add task failed: \(error.localizedDescription)")
+        let alert = UIAlertController(title: "Error", message: "Failed to save item", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+      } else {
+        print("Task saved: \(uuid)")
       }
     }
+    
     presentingViewController?.dismiss(animated: true, completion: nil)
   }
 
@@ -67,19 +58,7 @@ class ComposeViewController: UIViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "fromComposeToHome" {
-      let destinationVC = segue.destination as! HomeViewController
-      destinationVC.loadTasks()
+//      let destinationVC = segue.destination as! HomeViewController
     }
   }
-
-/*
-// MARK: - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
-}
-*/
-
 }

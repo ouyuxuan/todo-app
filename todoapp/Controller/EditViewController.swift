@@ -2,28 +2,30 @@ import UIKit
 import Firebase
 import CoreData
 
-class EditViewController: UIViewController {
+class EditViewController: UIViewController, UITextViewDelegate {
     
   @IBOutlet weak var editTextView: UITextView!
 
   var appDelegate = UIApplication.shared.delegate as! AppDelegate
   let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
   var selectedTaskUuid = ""
-  
+  var db : Firestore!
+
   override func viewDidLoad() {
     super.viewDidLoad()
-    let request = Task.fetchRequest() as NSFetchRequest<Task>
-    let predicate = NSPredicate(format: "uuid == %@", selectedTaskUuid)
-    request.predicate = predicate
-    request.fetchLimit = 1
-
-    do {
-      let task = try context.fetch(request)
-      editTextView.text = task.first?.text
-    } catch {
-      print("Error fetching context \(error)")
-    }
-    // Do any additional setup after loading the view.
+    self.editTextView.delegate = self
+    print("in edit: ")
+    print(selectedTaskUuid)
+//    db = Firestore.firestore()
+//    db.collection("tasks").whereField("uuid", isEqualTo: selectedTaskUuid).getDocuments { (querySnapshot, err) in
+//      if let err = err {
+//        print("Error getting documents: \(err)")
+//      } else {
+//        for documents in querySnapshot!.documents {
+//          self.editTextView.text = documents.data()["text"] as? String ?? ""
+//        }
+//      }
+//    }
   }
 
   override func didReceiveMemoryWarning() {
@@ -32,10 +34,8 @@ class EditViewController: UIViewController {
   }
 
   @IBAction func editPost(_ sender: Any) {
-    let task = Task(context: context)
-    task.text = editTextView.text
-    appDelegate.saveContext()
-    presentingViewController?.dismiss(animated: true, completion: nil)
+//    let docToUpdate = db.collection("tasks").document(selectedTaskUuid)
+//    updateData(["text": editTextView.text ?? ""])
   }
 
   @IBAction func cancelPost(_ sender: Any) {

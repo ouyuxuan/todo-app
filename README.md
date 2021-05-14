@@ -1,5 +1,5 @@
 # todo-app
-Simple TO-DO app powered using Core Data and Google Firebase. Log in to have all the TO-DO entries synced up.
+Simple TO-DO app powered using CoreData and Google Firebase. Log in to have all the TO-DO entries synced up.
 
 ### Screenshot
 

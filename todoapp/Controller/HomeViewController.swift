@@ -29,7 +29,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
               let task = Task(context: self.context)
               task.text = document.data()["text"] as? String ?? ""
               task.priority = Int32(document.data()["priority"] as? Int ?? 0)
-              task.userid = document.data()["user_id"] as? String ?? ""
+              task.userid = document.data()["userid"] as? String ?? ""
               task.uuid = document.data()["uuid"] as? String ?? ""
               task.done = document.data()["done"] as? Bool ?? false
               self.taskArray.append(task)
@@ -56,7 +56,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // fetch tasks from Core Data
     taskArray.removeAll()
     let request = Task.fetchRequest() as NSFetchRequest<Task>
-    let predicate = NSPredicate(format: "userid == %@", currentUser?.uid ?? "")
+    let predicate = NSPredicate(format: "userid == %@", "")
     request.predicate = predicate
     do {
       taskArray = try context.fetch(request)
@@ -133,6 +133,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
     Auth.auth().removeStateDidChangeListener(handle!)
+    taskListener?.remove()
   }
   
   @IBAction func unwindToHome(_ unwindSegue: UIStoryboardSegue) {}

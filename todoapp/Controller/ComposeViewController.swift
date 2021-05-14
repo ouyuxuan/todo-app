@@ -32,7 +32,7 @@ class ComposeViewController: UIViewController {
       let taskToSave = Task(context: self.context)
       taskToSave.text = taskText
       taskToSave.done = false
-      taskToSave.userid = currentUser?.uid ?? ""
+      taskToSave.userid = ""
       taskToSave.uuid = uuid
       taskToSave.priority = 0
       taskToSave.createdOn = Date()
